@@ -1,4 +1,20 @@
 
+# Node Stripe Payments
+
+⚡️ Node Js Package For Implementing Stripe Credit Card Payments In Express/Node Js
+
+
+
+
+## Installation
+
+Install node-stripe-payments with npm/yarn
+
+```bash
+  npm install node-stripe-payments
+  yarn add node-stripe-payments
+```
+
 ## Example
 
 ```javascript
