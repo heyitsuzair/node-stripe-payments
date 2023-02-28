@@ -1,0 +1,13 @@
+{
+  "name": "node-stripe-payments",
+  "version": "1.0.0",
+  "description": "⚡️ Node Js Package For Implementing Stripe Credit Card Payments In Express/Node Js",
+  "main": "index.js",
+  "repository": "git@github.com:heyitsuzair/node-stripe-payments.git",
+  "author": "Muhammad Uzair <uzairdevil354123@gmail.com>",
+  "license": "MIT",
+  "private": null,
+  "dependencies": {
+    "stripe": "^11.12.0"
+  }
+}
