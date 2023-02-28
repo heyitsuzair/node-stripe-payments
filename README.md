@@ -21,7 +21,7 @@ Install node-stripe-payments with npm/yarn
 const { Stripe_Client } = require("node-stripe-payments");
 
 // Create An Instance of "Stripe_Client" Class
-nsp_client = new Stripe_Client(""); // Provide Your Stripe Secret Key
+const nsp_client = new Stripe_Client(""); // Provide Your Stripe Secret Key
 
 async function chargeCreditCard() {
   try {
