@@ -32,7 +32,7 @@ async function chargeCreditCard() {
      *
      * @params @required (Card No,Expiry Month, Expiry Year, CVC) Card Details From Which You Want To Charge/Take Amount
      */
-    card_token = await nsp_client.card_token("4242424242424242", 12, 2025, 123); // Returns Promise
+    const card_token = await nsp_client.card_token("4242424242424242", 12, 2025, 123); // Returns Promise
 
     /**
      * @method charge_card Will Call Stripe API To Charge The Card Against Token ID That You Will Get In @response of "card_token" @method
@@ -46,7 +46,7 @@ async function chargeCreditCard() {
      * @param source: Token ID Which You Will Get In Response from "card_token" @method @required
      * @param description: Description Of Charge
      */
-    card_charge = await nsp_client.charge_card(
+    const card_charge = await nsp_client.charge_card(
       200000,
       "pkr",
       card_token.id,
