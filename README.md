@@ -1,7 +1,7 @@
 
 # Node Stripe Payments
 
-⚡️ Node Js Package For Implementing Stripe Credit Card Payments In Express/Node Js
+⚡️ Node Js Package For Implementing Stripe Payments In Express/Node Js
 
 
 
@@ -126,4 +126,15 @@ async function checkoutSession() {
 checkoutSession();
 
 ```
+
+
+## Documentation
+
+[Official Page](https://github.com/heyitsuzair/node-stripe-payments)
+
+
+## Features
+
+- Credit Card Payments
+- Checkout Sessions
 
