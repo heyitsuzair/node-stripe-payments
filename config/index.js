@@ -72,4 +72,36 @@ module.exports.Stripe_Client = class Stripe_Client {
         "Please Provide Token Id That You Got From 'card_token' Method"
       );
   }
+  async create_checkout_session(
+    line_items,
+    success_url,
+    cancel_url,
+    mode = "payment",
+    payment_method_types = ["card"]
+  ) {
+    this.have_checkout_session_details(line_items, success_url, cancel_url);
+    try {
+      const session = await this.stripe.checkout.sessions.create({
+        success_url,
+        line_items,
+        mode,
+        payment_method_types,
+        cancel_url,
+      });
+      return session;
+    } catch ({ message }) {
+      throw new Error(message);
+    }
+  }
+  have_checkout_session_details(line_items, success_url, cancel_url) {
+    if (!line_items) throw new Error("Please Provide Line Items");
+    if (!success_url)
+      throw new Error(
+        "Please Provide Success URL (URL On Which User Will Be Redirected On Successful Payment)"
+      );
+    if (!cancel_url)
+      throw new Error(
+        "Please Provide Cancel URL (URL On Which User Will Be Redirected When He/She Presses 'Back' Button On Checkout Page Hosted By Stripe)"
+      );
+  }
 };

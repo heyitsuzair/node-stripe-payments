@@ -15,13 +15,15 @@ Install node-stripe-payments with npm/yarn
   yarn add node-stripe-payments
 ```
 
-## Example
+# Examples
+
+## Charge A Credit Card
 
 ```javascript
 const { Stripe_Client } = require("node-stripe-payments");
 
 // Create An Instance of "Stripe_Client" Class
-const nsp_client = new Stripe_Client(""); // Provide Your Stripe Secret Key
+nsp_client = new Stripe_Client(""); // Provide Your Stripe Secret Key
 
 async function chargeCreditCard() {
   try {
@@ -32,7 +34,7 @@ async function chargeCreditCard() {
      *
      * @params @required (Card No,Expiry Month, Expiry Year, CVC) Card Details From Which You Want To Charge/Take Amount
      */
-    const card_token = await nsp_client.card_token("4242424242424242", 12, 2025, 123); // Returns Promise
+    card_token = await nsp_client.card_token("4242424242424242", 12, 2025, 123); // Returns Promise
 
     /**
      * @method charge_card Will Call Stripe API To Charge The Card Against Token ID That You Will Get In @response of "card_token" @method
@@ -46,7 +48,7 @@ async function chargeCreditCard() {
      * @param source: Token ID Which You Will Get In Response from "card_token" @method @required
      * @param description: Description Of Charge
      */
-    const card_charge = await nsp_client.charge_card(
+    card_charge = await nsp_client.charge_card(
       200000,
       "pkr",
       card_token.id,
@@ -60,3 +62,68 @@ async function chargeCreditCard() {
 chargeCreditCard();
 
 ```
+
+## Create Checkout Session
+
+```javascript
+const { Stripe_Client } = require("node-stripe-payments");
+
+// Create An Instance of "Stripe_Client" Class
+const nsp_client = new Stripe_Client(""); // Provide Your Stripe Secret Key
+
+async function checkoutSession() {
+  try {
+    /**
+     * @var line_items
+     *
+     * Line Items That Will Be Used To Show Bill And Items Along With Quantity On Checkout Page Hosted By Stripe
+     *
+     * For More Information See https://stripe.com/docs/api/checkout/sessions/create
+     */
+    const line_items = [
+      {
+        price_data: {
+          currency: "pkr",
+          unit_amount: 200000,
+          product_data: {
+            name: "T-shirt",
+            description: "Comfortable cotton t-shirt",
+            // images: [""],  You Can Provide Product Images Here
+          },
+        },
+        quantity: 1,
+      },
+      {
+        price_data: {
+          currency: "pkr",
+          unit_amount: 200000,
+          product_data: {
+            name: "Hoodie",
+            description: "Comfortable cotton Hoodie",
+            // images: [""],  You Can Provide Product Images Here
+          },
+        },
+        quantity: 2,
+      },
+    ];
+
+    /**
+     * @method create_checkout_session
+     *
+     * @params (line_items,success_url,cancel_url) @required
+     * @params (mode,payment_method_types) @optional
+     */
+    const session = await nsp_client.create_checkout_session(
+      line_items,
+      "https://www.google.com",
+      "https://www.facebook.com"
+    ); // Returns Promise
+    console.log(session); // Returns An Object On Success. It Returns "url" in object that you can send to frontend in response and from frontend you can redirect user to url to pay amount
+  } catch ({ message }) {
+    console.log(message);
+  }
+}
+checkoutSession();
+
+```
+
