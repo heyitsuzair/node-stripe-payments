@@ -7,6 +7,7 @@
   "author": "Muhammad Uzair <uzairdevil354123@gmail.com>",
   "license": "MIT",
   "private": null,
+  "keywords": ["node-stripe-payments","node-stripe","stripe-payments"],
   "dependencies": {
     "stripe": "^11.12.0"
   }
